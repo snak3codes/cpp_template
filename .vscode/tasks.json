@@ -1,0 +1,32 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "clang++ build active file", // Label for tasks list.
+      "command": "/usr/bin/clang++", // Specifies the program to run
+      "args": [
+        // Command Line Arguments
+        "-std=c++17", // Compile with C++17, because we're using C++17 features
+        "-stdlib=libc++",
+        "-g",
+        // "${file}", // Compile this file,
+        "${fileDirname}/*.cpp", // Compile all files inside of this folder
+        "-o", // create an output file
+        "${workspaceFolder}/${fileBasenameNoExtension}" // in the current directory
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}" // Changes current working directory to workspace folder
+      },
+      "problemMatcher": ["$gcc"], //selects the output parser to use for finding
+      //errors and warnings in the compiler output. For clang++, you'll get the best
+      // results if you use the $gcc problem matcher.
+      "group": {
+        "kind": "build",
+        "isDefault": true // Specifies that this task will be run when you press ⇧⌘B
+      }
+    }
+  ]
+}
